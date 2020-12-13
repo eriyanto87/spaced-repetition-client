@@ -1,120 +1,158 @@
-import React, { Component } from 'react'
-import AuthApiService from '../services/auth-api-service'
-import TokenService from '../services/token-service'
-import IdleService from '../services/idle-service'
+import React, { Component } from "react";
+import AuthApiService from "../services/auth-api-service";
+import TokenService from "../services/token-service";
+import IdleService from "../services/idle-service";
 
 const UserContext = React.createContext({
   user: {},
   error: null,
+  language: null,
+  words: null,
   setError: () => {},
   clearError: () => {},
   setUser: () => {},
   processLogin: () => {},
   processLogout: () => {},
-})
+  setLanguage: () => {},
+  name: "evi",
+});
 
-export default UserContext
+export default UserContext;
 
 export class UserProvider extends Component {
   constructor(props) {
-    super(props)
-    const state = { user: {}, error: null }
+    super(props);
+    const state = {
+      user: {},
+      error: null,
+      language: null,
+      words: null,
+      nextWord: null,
+      totalScore: null,
+      currWord: null,
+      guess: null,
+      name: "evi",
+    };
 
-    const jwtPayload = TokenService.parseAuthToken()
+    const jwtPayload = TokenService.parseAuthToken();
 
     if (jwtPayload)
       state.user = {
         id: jwtPayload.user_id,
         name: jwtPayload.name,
         username: jwtPayload.sub,
-      }
+      };
 
     this.state = state;
-    IdleService.setIdleCallback(this.logoutBecauseIdle)
+    IdleService.setIdleCallback(this.logoutBecauseIdle);
   }
 
   componentDidMount() {
     if (TokenService.hasAuthToken()) {
-      IdleService.regiserIdleTimerResets()
+      IdleService.regiserIdleTimerResets();
       TokenService.queueCallbackBeforeExpiry(() => {
-        this.fetchRefreshToken()
-      })
+        this.fetchRefreshToken();
+      });
     }
   }
 
   componentWillUnmount() {
-    IdleService.unRegisterIdleResets()
-    TokenService.clearCallbackBeforeExpiry()
+    IdleService.unRegisterIdleResets();
+    TokenService.clearCallbackBeforeExpiry();
   }
 
-  setError = error => {
-    console.error(error)
-    this.setState({ error })
-  }
+  setError = (error) => {
+    console.error(error);
+    this.setState({ error });
+  };
 
   clearError = () => {
-    this.setState({ error: null })
-  }
+    this.setState({ error: null });
+  };
 
-  setUser = user => {
-    this.setState({ user })
-  }
+  setUser = (user) => {
+    this.setState({ user });
+  };
 
-  processLogin = authToken => {
-    TokenService.saveAuthToken(authToken)
-    const jwtPayload = TokenService.parseAuthToken()
+  setLanguage = (language) => {
+    this.setState({
+      language: language,
+    });
+  };
+
+  setWords = (words) => {
+    this.setState({
+      words: words,
+    });
+  };
+  processLogin = (authToken) => {
+    TokenService.saveAuthToken(authToken);
+    const jwtPayload = TokenService.parseAuthToken();
     this.setUser({
       id: jwtPayload.user_id,
       name: jwtPayload.name,
       username: jwtPayload.sub,
-    })
-    IdleService.regiserIdleTimerResets()
+    });
+    IdleService.regiserIdleTimerResets();
     TokenService.queueCallbackBeforeExpiry(() => {
-      this.fetchRefreshToken()
-    })
-  }
+      this.fetchRefreshToken();
+    });
+  };
 
   processLogout = () => {
-    TokenService.clearAuthToken()
-    TokenService.clearCallbackBeforeExpiry()
-    IdleService.unRegisterIdleResets()
-    this.setUser({})
-  }
+    TokenService.clearAuthToken();
+    TokenService.clearCallbackBeforeExpiry();
+    IdleService.unRegisterIdleResets();
+    this.setUser({});
+  };
 
   logoutBecauseIdle = () => {
-    TokenService.clearAuthToken()
-    TokenService.clearCallbackBeforeExpiry()
-    IdleService.unRegisterIdleResets()
-    this.setUser({ idle: true })
-  }
+    TokenService.clearAuthToken();
+    TokenService.clearCallbackBeforeExpiry();
+    IdleService.unRegisterIdleResets();
+    this.setUser({ idle: true });
+  };
 
   fetchRefreshToken = () => {
     AuthApiService.refreshToken()
-      .then(res => {
-        TokenService.saveAuthToken(res.authToken)
+      .then((res) => {
+        TokenService.saveAuthToken(res.authToken);
         TokenService.queueCallbackBeforeExpiry(() => {
-          this.fetchRefreshToken()
-        })
+          this.fetchRefreshToken();
+        });
       })
-      .catch(err => {
-        this.setError(err)
-      })
-  }
+      .catch((err) => {
+        this.setError(err);
+      });
+  };
 
   render() {
     const value = {
       user: this.state.user,
       error: this.state.error,
+      totalScore: this.state.totalScore,
       setError: this.setError,
+      currWord: this.state.currWord,
       clearError: this.clearError,
       setUser: this.setUser,
       processLogin: this.processLogin,
       processLogout: this.processLogout,
-    }
+      setLanguage: this.setLanguage,
+      language: this.state.language,
+      setWords: this.setWords,
+      guess: this.state.guess,
+      words: this.state.words,
+      nextWord: this.state.nextWord,
+      setNextWord: this.setNextWord,
+      setTotalScore: this.setTotalScore,
+      setCurrWord: this.setCurrWord,
+      setGuess: this.setGuess,
+      name: "evi",
+    };
     return (
       <UserContext.Provider value={value}>
         {this.props.children}
       </UserContext.Provider>
-    )
+    );
   }
 }

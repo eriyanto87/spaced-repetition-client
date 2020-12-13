@@ -1,0 +1,13 @@
+header {
+  text-align: center;
+  border-bottom: 2px solid red;
+  padding-bottom: 10px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.bold {
+  font-weight: bolder;
+}
