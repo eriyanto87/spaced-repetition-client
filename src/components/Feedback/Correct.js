@@ -9,13 +9,13 @@ export default class Correct extends Component {
     console.log(this.context.response);
     console.log(this.context.guess);
     return (
-      <main>
+      <>
         <h2>You were correct! :D</h2>
         <p className="DisplayScore">
           Your total score is: {this.context.response.totalScore}
         </p>
         <Feedback />
-      </main>
+      </>
     );
   }
 }

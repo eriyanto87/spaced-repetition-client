@@ -12,6 +12,7 @@ class Learn extends Component {
 
   state = {
     clicked: false,
+    answer: null,
   };
 
   async componentDidMount() {
@@ -53,16 +54,20 @@ class Learn extends Component {
       this.setState({ error: e });
     }
 
-    const { history } = this.props;
+    // const { history } = this.props;
 
     if (this.context.response.isCorrect) {
-      return history.push("/correct");
+      this.setState({
+        answer: "correct",
+      });
     } else {
-      return history.push("/incorrect");
+      this.setState({
+        answer: "incorrect",
+      });
     }
-    this.setState({
-      clicked: true,
-    });
+    // this.setState({
+    //   clicked: true,
+    // });
   }
 
   render() {
@@ -113,6 +118,10 @@ class Learn extends Component {
         <p>{this.context.feedback}</p>
         <p className="DisplayScore">hello</p>
         <p className="DisplayFeedback">Test</p>
+        <>
+          {this.state.answer === "correct" && <Correct />}
+          {this.state.answer === "incorrect" && <Incorrect />}
+        </>
       </main>
     );
   }
