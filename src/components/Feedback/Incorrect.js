@@ -8,10 +8,9 @@ export default class Incorrect extends Component {
     console.log(this.context.nextWord);
     return (
       <>
-        <h2>Good try, but not quite right :(</h2>
-        <p className="DisplayScore">
-          Your total score is: {this.context.response.totalScore}
-        </p>
+        <div className="DisplayScore">
+          <p>Your total score is: {this.context.response.totalScore}</p>
+        </div>
         <Feedback />
       </>
     );

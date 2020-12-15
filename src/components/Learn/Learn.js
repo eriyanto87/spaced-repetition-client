@@ -80,7 +80,11 @@ class Learn extends Component {
     return (
       <main className="box">
         <form onSubmit={(e) => this.submitForm(e, this.context)}>
-          <h2>Translate the word:</h2>
+          {this.state.answer == null && <h2>Translate the word:</h2>}
+          {this.state.answer === "correct" && <h2>You were correct! :D</h2>}
+          {this.state.answer === "incorrect" && (
+            <h2>Good try, but not quite right :(</h2>
+          )}
           <span>
             {this.context.nextWord ? this.context.nextWord.nextWord : null}
           </span>
@@ -100,7 +104,19 @@ class Learn extends Component {
                 required
               ></input>
             </p>
-            <button type="submit">Submit your answer</button>
+            {this.state.answer == null && (
+              <button type="submit">Submit your answer</button>
+            )}
+            {this.state.answer === "correct" && (
+              <button onClick={this.getNextWord}>
+                <a href="/learn">Try another word!</a>
+              </button>
+            )}
+            {this.state.answer === "incorrect" && (
+              <button onClick={this.getNextWord}>
+                <a href="/learn">Try another word!</a>
+              </button>
+            )}
           </fieldset>
         </form>
         <p>
@@ -116,12 +132,8 @@ class Learn extends Component {
             : null}
         </p>
         <p>{this.context.feedback}</p>
-        <p className="DisplayScore">hello</p>
-        <p className="DisplayFeedback">Test</p>
-        <>
-          {this.state.answer === "correct" && <Correct />}
-          {this.state.answer === "incorrect" && <Incorrect />}
-        </>
+        {this.state.answer === "correct" && <Correct />}
+        {this.state.answer === "incorrect" && <Incorrect />}
       </main>
     );
   }

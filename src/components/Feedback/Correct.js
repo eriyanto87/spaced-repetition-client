@@ -10,10 +10,9 @@ export default class Correct extends Component {
     console.log(this.context.guess);
     return (
       <>
-        <h2>You were correct! :D</h2>
-        <p className="DisplayScore">
-          Your total score is: {this.context.response.totalScore}
-        </p>
+        <div className="DisplayScore">
+          <p>Your total score is: {this.context.response.totalScore}</p>
+        </div>
         <Feedback />
       </>
     );

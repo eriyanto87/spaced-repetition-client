@@ -11,10 +11,12 @@ export default class Feedback extends Component {
         {/* <p className="DisplayScore">
           Your total score is: {this.context.response.totalScore}
         </p> */}
-        <p className="DisplayFeedback">
-          The correct translaton for {this.context.nextWord.nextWord} was{" "}
-          {this.context.response.answer} and you chose {this.context.guess}
-        </p>
+        <div className="DisplayFeedback">
+          <p>
+            The correct translation for {this.context.nextWord.nextWord} was{" "}
+            {this.context.response.answer} and you chose {this.context.guess}!
+          </p>
+        </div>
         <p>
           Word Correct Count:{" "}
           {this.context.response
@@ -27,9 +29,6 @@ export default class Feedback extends Component {
             ? this.context.response.wordIncorrectCount
             : null}
         </p>
-        <button onClick={this.getNextWord}>
-          <a href="/learn">Try another word!</a>
-        </button>
       </div>
     );
   }
