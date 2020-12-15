@@ -9,18 +9,18 @@ export default function ListOfWords(props) {
   console.log(props.words[0]);
   const words = props.words;
   return (
-    <div>
+    <>
       {words.map((word, i) => (
-        <div key={i} className="words">
-          <h3>{word.original}</h3>
+        <li key={i} className="words">
+          <h4>{word.original}</h4>
           <p className="bold">
-            Correct Count: <span>{word.correct_count}</span>
+            correct answer count: <span>{word.correct_count}</span>
           </p>
           <p className="bold">
-            Incorrect Count: <span>{word.incorrect_count}</span>
+            incorrect answer count: <span>{word.incorrect_count}</span>
           </p>
-        </div>
+        </li>
       ))}
-    </div>
+    </>
   );
 }

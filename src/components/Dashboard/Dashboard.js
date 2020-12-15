@@ -4,6 +4,7 @@ import UserContext from "../../contexts/UserContext";
 import ListOfWords from "../ListOfWords/ListOfWords";
 import Loading from "../Loading/Loading";
 import API from "../../config";
+import { Link } from "react-router-dom";
 
 export default class Dashboard extends Component {
   static contextType = UserContext;
@@ -18,27 +19,34 @@ export default class Dashboard extends Component {
       const json = await response.json();
       this.context.setLanguage(json.language.name);
       this.context.setWords(json.words);
+      this.context.setTotalScore(json.language.total_score);
     } catch (error) {
       this.context.setError(error);
     }
   }
 
   render() {
+    console.log(this.context);
+    console.log(this.context.language);
     return (
-      <div>
+      <section>
         <h1>You are learning</h1>
-        <h3>{this.context.language}</h3>
-        <p> Total Correct: {this.context.totalScore} </p>
-        <button>Click me to start practicing</button>
-        <h1>Words to Practice</h1>
-        <section>
+        <h2>{this.context.language}</h2>
+        <a href="/learn">Start practicing</a>
+        <h3>Words to practice</h3>
+        <p>
           {this.context.words ? (
             <ListOfWords words={this.context.words} />
           ) : (
             <Loading />
           )}
-        </section>
-      </div>
+        </p>
+        <p>
+          {this.context.totalScore
+            ? `Total correct answers: ${this.context.totalScore}`
+            : null}
+        </p>
+      </section>
     );
   }
 }

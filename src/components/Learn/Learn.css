@@ -1,0 +1,13 @@
+.box {
+  border: 1px solid grey;
+  border-radius: 8px;
+  margin: 8% 20%;
+  padding: 15px;
+}
+
+fieldset {
+  border: 1px solid grey;
+  border-radius: 8px;
+  margin: 3% 20%;
+  padding: 15px;
+}

@@ -8,12 +8,20 @@ const UserContext = React.createContext({
   error: null,
   language: null,
   words: null,
+  nextWord: null,
+  response: null,
+  guess: null,
+  setGuess: () => {},
+  setResponse: () => {},
   setError: () => {},
   clearError: () => {},
   setUser: () => {},
   processLogin: () => {},
   processLogout: () => {},
   setLanguage: () => {},
+  setWords: () => {},
+  setNextWord: () => {},
+  setTotalScore: () => {},
   name: "evi",
 });
 
@@ -31,6 +39,8 @@ export class UserProvider extends Component {
       totalScore: null,
       currWord: null,
       guess: null,
+      response: null,
+      feedback: null,
       name: "evi",
     };
 
@@ -83,6 +93,36 @@ export class UserProvider extends Component {
   setWords = (words) => {
     this.setState({
       words: words,
+    });
+  };
+
+  setNextWord = (word) => {
+    this.setState({
+      nextWord: word,
+    });
+  };
+
+  setResponse = (response) => {
+    this.setState({
+      response: response,
+    });
+  };
+
+  setFeedback = (feedback) => {
+    this.setState({
+      feedback: feedback,
+    });
+  };
+
+  setGuess = (guess) => {
+    this.setState({
+      guess: guess,
+    });
+  };
+
+  setTotalScore = (totalScore) => {
+    this.setState({
+      totalScore: totalScore,
     });
   };
   processLogin = (authToken) => {
@@ -147,6 +187,10 @@ export class UserProvider extends Component {
       setTotalScore: this.setTotalScore,
       setCurrWord: this.setCurrWord,
       setGuess: this.setGuess,
+      setResponse: this.setResponse,
+      response: this.state.response,
+      feedback: this.state.feedback,
+      setFeedback: this.setFeedback,
       name: "evi",
     };
     return (

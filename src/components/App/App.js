@@ -7,6 +7,8 @@ import RegistrationRoute from "../../routes/RegistrationRoute/RegistrationRoute"
 import LoginRoute from "../../routes/LoginRoute/LoginRoute";
 import DashboardRoute from "../../routes/DashboardRoute/DashboardRoute";
 import LearningRoute from "../../routes/LearningRoute/LearningRoute";
+import Correct from "../../components/Feedback/Correct";
+import Incorrect from "../../components/Feedback/Incorrect";
 import NotFoundRoute from "../../routes/NotFoundRoute/NotFoundRoute";
 import TokenService from "../../services/token-service";
 // import API_ENDPOINT from "../../config";
@@ -48,6 +50,8 @@ export default class App extends Component {
           <Switch>
             <PrivateRoute exact path={"/"} component={DashboardRoute} />
             <PrivateRoute path={"/learn"} component={LearningRoute} />
+            <PrivateRoute path={"/correct"} component={Correct} />
+            <PrivateRoute path={"/incorrect"} component={Incorrect} />
             <PublicOnlyRoute path={"/register"} component={RegistrationRoute} />
             <PublicOnlyRoute path={"/login"} component={LoginRoute} />
             <Route component={NotFoundRoute} />

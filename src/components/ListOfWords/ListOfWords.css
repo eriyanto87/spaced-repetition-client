@@ -5,3 +5,7 @@
 .bold {
   font-weight: bolder;
 }
+
+li {
+  list-style-type: none;
+}
