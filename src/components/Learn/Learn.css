@@ -11,3 +11,7 @@ fieldset {
   margin: 3% 20%;
   padding: 15px;
 }
+
+.feedback {
+  color: red;
+}

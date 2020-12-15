@@ -17,7 +17,7 @@ export default class Feedback extends Component {
             {this.context.response.answer} and you chose {this.context.guess}!
           </p>
         </div>
-        <p>
+        {/* <p>
           Word Correct Count:{" "}
           {this.context.response
             ? this.context.response.wordCorrectCount
@@ -28,7 +28,7 @@ export default class Feedback extends Component {
           {this.context.response
             ? this.context.response.wordIncorrectCount
             : null}
-        </p>
+        </p> */}
       </div>
     );
   }
