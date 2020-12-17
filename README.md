@@ -8,6 +8,14 @@
 
 An app which uses spaced repetition to help people memorize a foreign language. The app display words in one language and the users will be asked to input the corresponding word in a second language.
 
+## Screenshots
+
+![Registration_Route](./src/images/registration.png)
+![Login_Route](./src/images/login.png)
+![!Dashboard_Route](./src/dashboard.png)
+![Learning_Route](./src/learn.png)
+![Feedback_Example](./src/feedback.png)
+
 ### Front-end technologies
 
 Reactjs, HTML, CSS, JavaScript, HTML
