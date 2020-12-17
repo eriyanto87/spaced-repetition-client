@@ -1,5 +1,5 @@
 .words {
-  box-shadow: 1px 3px 3px 1px red;
+  box-shadow: 1px 3px 3px 1px #b20101;
   border-radius: 15px;
   padding: 10px;
   margin-bottom: 15px;
@@ -8,7 +8,7 @@
 .bold {
   font-weight: bolder;
   font-size: 38px;
-  color: red;
+  color: #b20101;
 }
 
 li {
@@ -17,7 +17,7 @@ li {
 
 @media all and (min-width: 800px) {
   .words {
-    box-shadow: 1px 3px 3px 1px red;
+    box-shadow: 1px 3px 3px 1px #b20101;
     border-radius: 15px;
     padding: 10px;
     flex-grow: 1;

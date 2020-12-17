@@ -43,6 +43,7 @@ export class UserProvider extends Component {
       guess: null,
       response: null,
       isClicked: false,
+      currentWord: "",
       name: "evi",
     };
 
@@ -95,6 +96,12 @@ export class UserProvider extends Component {
   setWords = (words) => {
     this.setState({
       words: words,
+    });
+  };
+
+  setCurrentWord = (word) => {
+    this.setState({
+      currentWord: word,
     });
   };
 
@@ -192,6 +199,8 @@ export class UserProvider extends Component {
       setGuess: this.setGuess,
       setResponse: this.setResponse,
       response: this.state.response,
+      setCurrentWord: this.setCurrentWord,
+      currentWord: this.state.currentWord,
       name: "evi",
     };
     return (

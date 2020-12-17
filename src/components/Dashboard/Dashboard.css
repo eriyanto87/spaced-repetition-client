@@ -1,9 +1,12 @@
 .learn {
   border-radius: 5px;
-  padding: 10px;
-  background-color: red;
+  padding: 22px;
+  background-color: #b20101;
   box-shadow: 5px 5px 0 grey;
-  color: black;
+  color: white;
+  font-weight: bolder;
+  text-decoration: none;
+  font-size: 30px;
 }
 
 .learn a:active {

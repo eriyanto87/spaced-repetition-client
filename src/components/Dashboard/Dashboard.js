@@ -5,7 +5,6 @@ import ListOfWords from "../ListOfWords/ListOfWords";
 import Loading from "../Loading/Loading";
 import API from "../../config";
 import "./Dashboard.css";
-import { Link } from "react-router-dom";
 
 export default class Dashboard extends Component {
   static contextType = UserContext;
@@ -21,6 +20,7 @@ export default class Dashboard extends Component {
       this.context.setLanguage(json.language.name);
       this.context.setWords(json.words);
       this.context.setTotalScore(json.language.total_score);
+      document.getElementById("learn").focus();
     } catch (error) {
       this.context.setError(error);
     }
@@ -31,7 +31,7 @@ export default class Dashboard extends Component {
       <section>
         <h1>You are learning</h1>
         <h2>{this.context.language}</h2>
-        <a className="learn" href="/learn">
+        <a id="learn" className="learn" href="/learn">
           Start practicing
         </a>
         <h3>Words to practice</h3>

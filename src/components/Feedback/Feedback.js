@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import UserContext from "../../contexts/UserContext";
+import "./Feedback.css";
 
 export default class Feedback extends Component {
   static contextType = UserContext;
@@ -8,7 +9,9 @@ export default class Feedback extends Component {
     return (
       <>
         <button>
-          <a href="/learn">Try another word!</a>
+          <a className="try" href="/learn">
+            Try another word!
+          </a>
         </button>
         <div className="DisplayFeedback">
           <p>

@@ -20,6 +20,9 @@ button {
   padding: 10px;
   border-radius: 5px;
   font-size: 19px;
+  background-color: #b20101;
+  font-weight: bolder;
+  font-size: 25px;
 }
 
 input {

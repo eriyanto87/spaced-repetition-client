@@ -4,32 +4,39 @@
 }
 
 .green {
-  color: green;
+  color: darkgreen;
+  font-weight: bolder;
 }
 
 .wordToGuess {
-  color: red;
+  color: #b20101;
   font-size: 48px;
   font-weight: bolder;
 }
 
 .feedback,
 .red {
-  color: red;
+  color: #b20101;
+  font-weight: bolder;
 }
 
 Button {
   width: 110px;
-  height: 80px;
-  background-color: red;
+  height: 100px;
+  background-color: #b20101;
   color: white;
   box-shadow: 2px 3px 3px 1px grey;
   align-self: center;
 }
 
+fieldset {
+  box-shadow: 2px 3px 5px 3px #b20101;
+  border-radius: 8px;
+}
+
 @media all and (min-width: 600px) {
   fieldset {
-    border: 1px solid grey;
+    box-shadow: 5px 10px 15px 3px #b20101;
     border-radius: 8px;
     margin: 3% 20%;
     padding: 15px;

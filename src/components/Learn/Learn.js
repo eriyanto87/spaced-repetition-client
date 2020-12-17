@@ -101,6 +101,7 @@ class Learn extends Component {
             </label>
             <p>
               <input
+                autoFocus
                 name="guess"
                 id="learn-guess-input"
                 type="text"
@@ -110,12 +111,11 @@ class Learn extends Component {
             {this.context.isClicked == false && (
               <button type="submit">Submit your answer</button>
             )}
-            <p>{this.context.feedback}</p>
             {this.context.isClicked === true && <Feedback />}
           </fieldset>
+          <p className="green">Correct Answers: {this.state.correct}</p>
+          <p className="red">Incorrect Answers: {this.state.incorrect}</p>
         </form>
-        <p className="green">Correct Answers: {this.state.correct}</p>
-        <p className="red">Incorrect Answers: {this.state.incorrect}</p>
       </main>
     );
   }
