@@ -1,6 +1,8 @@
 # Spaced Repetition Capstone
 
--[Live_App](https://spaced-repetition-one.vercel.app/) -[Server_Side_Repo](https://github.com/eriyanto87/spaced-repetition-api) -[Client_Side_Repo](https://github.com/eriyanto87/spaced-repetition-client)
+- [Live_App](https://spaced-repetition-one.vercel.app/)
+- [Server_Side_Repo](https://github.com/eriyanto87/spaced-repetition-api)
+- [Client_Side_Repo](https://github.com/eriyanto87/spaced-repetition-client)
 
 ## Description
 
