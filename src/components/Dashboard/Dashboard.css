@@ -1,0 +1,35 @@
+.learn {
+  border-radius: 5px;
+  padding: 10px;
+  background-color: red;
+  box-shadow: 5px 5px 0 grey;
+  color: black;
+}
+
+.learn a:active {
+  box-shadow: inset 5px 5px 0px grey;
+}
+.makeitnice {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid grey;
+  flex: 1 1 0;
+  justify-content: space-between;
+  padding: 40px 20px;
+  font-weight: 800;
+  gap: 5%;
+  flex-wrap: wrap;
+}
+
+@media all and (min-width: 800px) {
+  .makeitnice {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid grey;
+    flex: 1 1 0;
+    justify-content: space-between;
+    padding: 40px 20px;
+    font-weight: 800;
+    gap: 1%;
+  }
+}

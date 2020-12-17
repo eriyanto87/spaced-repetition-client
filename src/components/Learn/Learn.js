@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
 import TokenService from "../../services/token-service";
 import UserContext from "../../contexts/UserContext";
-import Correct from "../../components/Feedback/Correct";
-import Incorrect from "../../components/Feedback/Incorrect";
+import Feedback from "../../components/Feedback/Feedback";
 import API from "../../config";
 import "./Learn.css";
 
@@ -12,8 +10,10 @@ class Learn extends Component {
 
   state = {
     answer: null,
+    score: null,
     correct: "",
     incorrect: "",
+    total: 0,
   };
 
   async componentDidMount() {
@@ -29,8 +29,10 @@ class Learn extends Component {
       this.setState({
         correct: json.wordCorrectCount,
         incorrect: json.wordIncorrectCount,
+        total: json.totalScore,
+        isClicked: false,
+        score: null,
       });
-      console.log(json);
     } catch (e) {
       this.setState({ error: e });
     }
@@ -39,7 +41,6 @@ class Learn extends Component {
   async submitForm(e) {
     e.preventDefault();
     const guessWord = e.target.guess.value.toLowerCase().trim();
-    console.log(guessWord);
     this.context.setGuess(guessWord);
     //do POST!
     try {
@@ -53,18 +54,16 @@ class Learn extends Component {
       });
       const json = await response.json();
       this.context.setResponse(json);
-      // this.context.setTotalScore(json.totalScore);
-      console.log(this.context);
-      console.log(json);
+      this.setState({
+        total: json.totalScore,
+      });
     } catch (e) {
       this.setState({ error: e });
     }
 
     this.context.setTotalScore(this.context.response.totalScore);
-    // this.setState({
-    //   correct: this.context.nextWord.wordCorrectCount++,
-    //   incorrect: this.context.response.wordIncorrectCount,
-    // });
+
+    this.context.setClicked(true);
 
     if (this.context.response.isCorrect) {
       this.setState({
@@ -80,26 +79,22 @@ class Learn extends Component {
   }
 
   render() {
-    console.log(this.context);
-    console.log(this.context.nextWord);
-    console.log(this.context.response);
-    console.log(this.context.totalScore);
-    const tscore = this.context.totalScore;
-
     return (
       <main className="box">
         <form onSubmit={(e) => this.submitForm(e, this.context)}>
-          {this.state.answer == null && <h2>Translate the word:</h2>}
+          {this.state.answer === null && <h2>Translate the word:</h2>}
           {this.state.answer === "correct" && (
             <h2 className="feedback">You were correct! :D</h2>
           )}
           {this.state.answer === "incorrect" && (
             <h2 className="feedback">Good try, but not quite right :(</h2>
           )}
-          <span>
+          <span className="wordToGuess">
             {this.context.nextWord ? this.context.nextWord.nextWord : null}
           </span>
-          {this.state.answer == null && <p>Your total score is: {tscore}</p>}
+          <div className="DisplayScore">
+            <p>Your total score is: {this.state.total}</p>
+          </div>
           <fieldset>
             <label htmlFor="learn-guess-input">
               What's the translation for this word?
@@ -112,29 +107,18 @@ class Learn extends Component {
                 required
               ></input>
             </p>
-            {this.state.answer == null && (
+            {this.context.isClicked == false && (
               <button type="submit">Submit your answer</button>
             )}
-            {this.state.answer === "correct" && (
-              <button>
-                <a href="/learn">Try another word!</a>
-              </button>
-            )}
-            {this.state.answer === "incorrect" && (
-              <button>
-                <a href="/learn">Try another word!</a>
-              </button>
-            )}
+            <p>{this.context.feedback}</p>
+            {this.context.isClicked === true && <Feedback />}
           </fieldset>
         </form>
-        <p>Correct Answers: {this.state.correct}</p>
-        <p>Incorrect Answers: {this.state.incorrect}</p>
-        <p>{this.context.feedback}</p>
-        {this.state.answer === "correct" && <Correct />}
-        {this.state.answer === "incorrect" && <Incorrect />}
+        <p className="green">Correct Answers: {this.state.correct}</p>
+        <p className="red">Incorrect Answers: {this.state.incorrect}</p>
       </main>
     );
   }
 }
 
-export default withRouter(Learn);
+export default Learn;

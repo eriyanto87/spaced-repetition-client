@@ -1,11 +1,27 @@
 .words {
-  border: 1px solid grey;
+  box-shadow: 1px 3px 3px 1px red;
+  border-radius: 15px;
+  padding: 10px;
+  margin-bottom: 15px;
 }
 
 .bold {
   font-weight: bolder;
+  font-size: 38px;
+  color: red;
 }
 
 li {
   list-style-type: none;
+}
+
+@media all and (min-width: 800px) {
+  .words {
+    box-shadow: 1px 3px 3px 1px red;
+    border-radius: 15px;
+    padding: 10px;
+    flex-grow: 1;
+    width: calc(100% * (1 / 5) - 10px - 1px);
+    gap: 3%;
+  }
 }
